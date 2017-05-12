@@ -1,0 +1,23 @@
+<section class="all-link">
+  <% @links.each do |link| %>
+    <div class="link">
+
+      <div class="title">
+        <%= link_to link.title, (link.url? ? link.url : link) %>
+
+        <% if link.url? %>
+          <span>
+            ( <%= link.url %>)
+          </span>
+        <% end %>
+      </div>
+
+      <div class="metadata">
+        <span class="time-created">
+          <%= time_ago_in_words(link.created_at) %> ago
+        </span>
+      </div>
+
+    </div>
+  <% end %>
+</section>
