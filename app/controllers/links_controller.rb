@@ -1,5 +1,6 @@
 class LinksController < ApplicationController
   before_action :prevent_unauthorized_user_access, only: [:new, :edit]
+  before_action :prevent_unauthorized_user_access, except: [:show, :index]
   def index
     @links = Link.all
   end
@@ -53,6 +54,37 @@ class LinksController < ApplicationController
   def show
     @link = Link.find_by(id: params[:id])
     @comments = @link.comments
+  end
+
+  def upvote
+    link = Link.find_by(id: params[:id])
+
+    if current_user.upvoted?(link)
+      current_user.remove_vote(link)
+    elsif current_user.downvoted?(link)
+      current_user.remove_vote(link)
+      current_user.upvote(link)
+    else
+      current_user.upvote(link)
+    end
+
+    redirect_to root_path
+  end
+
+  def downvote
+    link = Link.find_by(id: params[:id])
+
+    if current_user.downvoted?(link)
+      current_user.remove_vote(link)
+    elsif current_user.upvoted?(link)
+      current_user.remove_vote(link)
+      current_user.downvote(link)
+    else
+      current_user.downvote(link)
+    end
+
+    redirect_to root_path
+
   end
 
   private

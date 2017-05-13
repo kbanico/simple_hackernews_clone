@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513090141) do
+ActiveRecord::Schema.define(version: 20170513090548) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -27,8 +27,10 @@ ActiveRecord::Schema.define(version: 20170513090141) do
     t.string   "url"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "points",      default: 1
+    t.float    "hot_score",   default: 0.0
     t.index ["user_id"], name: "index_links_on_user_id"
   end
 
