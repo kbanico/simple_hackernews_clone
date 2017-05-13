@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513072340) do
+ActiveRecord::Schema.define(version: 20170513090141) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -37,6 +37,17 @@ ActiveRecord::Schema.define(version: 20170513072340) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "link_id"
+    t.integer  "upvote",     default: 0
+    t.integer  "downvote",   default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["link_id"], name: "index_votes_on_link_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
 end

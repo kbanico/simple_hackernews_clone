@@ -16,6 +16,9 @@
         <span class="time-created">
           <%= time_ago_in_words(link.created_at) %> ago
         </span>
+        <span class="comment-count">
+          <%= link_to pluralize(link.comment_count, "comment"), link %>
+        </span>
         <% if logged_in? && current_user.owns_link?(link) %>
           <span class="edit-link">
             <%= link_to "edit", edit_link_path(link) %>
