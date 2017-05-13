@@ -1,6 +1,6 @@
 <section class="link-thread">
   <header>
-    <h4><%= @link.title %></h4>
+    <%= render @link %>
     <% if @link.description? %>
       <p><%= @link.description %></p>
     <% end %>
